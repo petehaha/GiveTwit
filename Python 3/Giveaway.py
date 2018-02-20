@@ -129,11 +129,11 @@ if __name__ == '__main__':
 
     #method, url and parameters to call
     method = "get"
-    url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
+    url = "https://api.twitter.com/1.1/search/tweets.json"
     url_parameters = {
-        'exclude_replies': 'true'
+        'q': 'giveaway'
     }
-
+    
     #configuration hash for the keys
     keys = {
         "twitter_consumer_secret": config.get(
@@ -163,4 +163,17 @@ if __name__ == '__main__':
 
     r = requests.get(url, headers=headers)
 
-    print(json.dumps(json.loads(r.text), sort_keys=False, indent=4))
+    returnData = json.dumps(json.loads(r.text), sort_keys=False, indent=4)
+    
+    print(returnData)
+
+if returnData != None:
+    
+    splitTweet1 = returnData.split("max_id_str")
+    tweetId1 = splitTweet1[1].rsplit(None,-1)[1]
+    splitTweet1.value("max_id_str")
+    tweetId2 = splitTweet2.rsplit(None,-1)[1]
+    tweetId1 = tweetId1[1:19]
+    tweetId2 = tweetId2[1:19]
+    
+    print(tweetId1)
